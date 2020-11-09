@@ -3,6 +3,7 @@ title: "Winter conditions in Mittadalen sameby"
 author: "Bernardo Brandão Niebuhr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+#pdf_document
 vignette: >
   %\VignetteIndexEntry{Winter conditions in Mittadalen sameby}
   %\VignetteEngine{knitr::rmarkdown}
