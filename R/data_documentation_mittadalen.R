@@ -26,7 +26,7 @@
 #' @example
 #' examples/data_examples.R
 #'
-#' @source SMHI
+  #' @source \url{https://www.smhi.se/}
 #' @keywords data, weather conditions
 "weather_mittadalen"
 # "weather_mittadalen_allstations"

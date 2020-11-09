@@ -15,7 +15,7 @@
   \item{temp_avg}{average daily temperature in degrees Celcius, measured in Dravagen}
 }}
 \source{
-SMHI
+\url{https://www.smhi.se/}
 }
 \usage{
 data(weather_tassasen)

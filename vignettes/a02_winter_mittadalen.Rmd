@@ -1,11 +1,11 @@
 ---
-title: "Winter conditions in Mittadalen sameby"
+title: "Winter conditions in Mittådalen sameby"
 author: "Bernardo Brandão Niebuhr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 #pdf_document
 vignette: >
-  %\VignetteIndexEntry{Winter conditions in Mittadalen sameby}
+  %\VignetteIndexEntry{Winter conditions in Mittådalen sameby}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
