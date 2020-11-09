@@ -2,6 +2,8 @@ pandoc: 2.7.2
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
+  winter_mittadalen: winter_mittadalen.html
+  winter_tassasen: winter_tassasen.html
   witch_start: witch_start.html
-last_built: 2020-11-09T09:48Z
+last_built: 2020-11-09T15:30Z
 

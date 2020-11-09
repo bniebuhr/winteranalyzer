@@ -77,7 +77,7 @@ the output of the function analyze_weather." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">witch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -99,6 +99,12 @@ the output of the function analyze_weather." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/winter_mittadalen.html">Winter conditions in Mittådalen sameby</a>
+    </li>
+    <li>
+      <a href="../articles/winter_tassasen.html">Winter conditions in Tåssåsen sameby</a>
+    </li>
     <li>
       <a href="../articles/witch_start.html">Starting with witch: winter conditions and characterization</a>
     </li>
@@ -241,10 +247,10 @@ may be worse.</p></td>
 conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> ------------------------------------------------------------------------------------------ tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.3</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> -------------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.3</span>
 #&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 2.1.3     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dplyr  </span><span> 1.0.2</span>
 #&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.0.0     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.4.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'ggplot2' was built under R version 3.6.3</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'dplyr' was built under R version 3.6.3</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> --------------------------------------------------------------------------------------------- tidyverse_conflicts() --</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.4.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'ggplot2' was built under R version 3.6.3</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'dplyr' was built under R version 3.6.3</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ----------------------------------------------- tidyverse_conflicts() --</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span> masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>    masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>weather_mittadalen</span>)
 
@@ -417,14 +423,15 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 <span class='co'># for several years</span>
 <span class='no'>n_weather</span> <span class='kw'>&lt;-</span> <span class='no'>weather_mittadalen</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>nest</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='no'>prec</span>, <span class='no'>temp_min</span>, <span class='no'>temp_max</span>, <span class='no'>temp_avg</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>winter_conditions</span> <span class='kw'>=</span>
-                  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>data</span>, ~ <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>.</span>, <span class='fu'>analyze_weather</span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='no'>prec</span>, <span class='no'>temp_min</span>, <span class='no'>temp_max</span>, <span class='no'>temp_avg</span>))),
-                <span class='kw'>n_days3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_days</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
-                <span class='kw'>n_days4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_days</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>)),
-                <span class='kw'>n_events3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_events</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
-                <span class='kw'>n_events4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_events</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>)),
-                <span class='kw'>duration3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>duration_event</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
-                <span class='kw'>duration4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>duration_event</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>))) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(
+    <span class='kw'>winter_conditions</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>data</span>, ~ <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>.</span>, <span class='fu'>analyze_weather</span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='no'>prec</span>, <span class='no'>temp_min</span>, <span class='no'>temp_max</span>, <span class='no'>temp_avg</span>))),
+    <span class='kw'>n_days3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_days</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
+    <span class='kw'>n_days4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_days</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>)),
+    <span class='kw'>n_events3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_events</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
+    <span class='kw'>n_events4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>n_events</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>)),
+    <span class='kw'>duration3</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>duration_event</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>3</span>)),
+    <span class='kw'>duration4</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>winter_conditions</span>, ~ <span class='fu'>duration_event</span>(<span class='no'>.</span>, <span class='kw'>event</span> <span class='kw'>=</span> <span class='fl'>4</span>))
+  ) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='no'>n_days3</span>:<span class='no'>n_events4</span>)
 
 <span class='no'>n_weather</span> <span class='kw'>%&gt;%</span>
@@ -445,7 +452,7 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bernardo Niebuhr, Anna Skarin.</p>
+  <p>Developed by Bernardo Niebuhr, Anna Skarin, Per Sandström.</p>
 </div>
 
 <div class="pkgdown">

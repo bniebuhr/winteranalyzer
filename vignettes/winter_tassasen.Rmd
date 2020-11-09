@@ -143,3 +143,6 @@ winter_herders %>%
 #             mean4 = mean(n_events4))
 ```
 
+# References
+
+Lundqvist, H., Norell, L., Danel, O. 2007. Multivariate characterisation of environmental conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.
