@@ -1,6 +1,7 @@
-^winteranalyzer\.Rproj$
+^witch\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^\.github$
+^data-raw$
