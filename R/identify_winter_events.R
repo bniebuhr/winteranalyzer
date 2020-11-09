@@ -4,10 +4,11 @@
 #' Lundqvist et al. (2007). The functions uses daily temperature (min, max, or average, in degrees Celcius) and
 #' precipitation (in mm) to identify events that may be harsh weather conditions for reindeer husbandry.
 #'
-#' @details The events are:
-#' - Events 1 and 2 are still to be implemented;
-#' - Event 3: Day when max temp > 2, min temp < -2, and precipitation > 3 mm;
-#' - Event 4: Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.
+#' @details
+#' The events are:
+#'   * Events 1 and 2 are still to be implemented;
+#'   * Event 3: Day when max temp > 2, min temp < -2, and precipitation > 3 mm;
+#'   * Event 4: Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.
 #'
 #' @param date date object. vector. Vector of dates in a time series of a given winter.
 #' @param temp_min numeric. vector. Minimum daily temperature, in Celsius.

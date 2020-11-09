@@ -10,8 +10,11 @@ plot_weather(
     "cumulative_precitation", "prec_snow_ratio", "prec_snow_diff", "snow_prec_ratio",
     "snow_prec_diff")[c(1, 2)],
   factor_mult = rep(1, length(term)),
+  add_events = c("", "events3", "events4")[1],
+  first_half = TRUE,
   cols = c(),
-  units = c()
+  units = c(),
+  title = ""
 )
 }
 \arguments{
@@ -51,9 +54,10 @@ weather_condition_2019 <-
 
 plot_weather(weather_condition_2019, term = c("snow_depth", "precip"))
 plot_weather(weather_condition_2019, term = c("snow_de", "cum"))
+plot_weather(weather_condition_2019, term = c("snow_de", "cum"), add_events = "events3")
 plot_weather(weather_condition_2019, term = c("snow_de", "cum", "snow_prec_ratio"))
 plot_weather(weather_condition_2019, term = c("snow_de", "cum", "snow_prec_ratio"),
              factor_mult = c(1,1,100))
 plot_weather(weather_condition_2019, term = c("snow_de", "cum", "snow_prec_ratio"),
-             factor_mult = c(.01,.01,1))
+             factor_mult = c(.01,.01,1), add_events = "events3")
 }

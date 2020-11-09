@@ -115,7 +115,7 @@ weather_condition$weather_indices \%>\%
   labs(x = "Date", y = "Amount (mm)", color = "")
 
 # plot with events
-weather_condition$weather_indices \%>\%
+weather_condition \%>\%
   plot_weather(term = c("snow_depth", "cum", "prec", "temp_max")) +
   geom_vline(xintercept = weather_condition$events3$event_dates, linetype = 2)
 
@@ -127,14 +127,15 @@ weather_condition$weather_indices \%>\%
 # for several years
 n_weather <- weather_mittadalen \%>\%
   tidyr::nest(data = c(date, snow_depth, prec, temp_min, temp_max, temp_avg)) \%>\%
-  dplyr::mutate(winter_conditions =
-                  purrr::map(data, ~ with(., analyze_weather(date, snow_depth, prec, temp_min, temp_max, temp_avg))),
-                n_days3 = purrr::map(winter_conditions, ~ n_days(., event = 3)),
-                n_days4 = purrr::map(winter_conditions, ~ n_days(., event = 4)),
-                n_events3 = purrr::map(winter_conditions, ~ n_events(., event = 3)),
-                n_events4 = purrr::map(winter_conditions, ~ n_events(., event = 4)),
-                duration3 = purrr::map(winter_conditions, ~ duration_event(., event = 3)),
-                duration4 = purrr::map(winter_conditions, ~ duration_event(., event = 4))) \%>\%
+  dplyr::mutate(
+    winter_conditions = purrr::map(data, ~ with(., analyze_weather(date, snow_depth, prec, temp_min, temp_max, temp_avg))),
+    n_days3 = purrr::map(winter_conditions, ~ n_days(., event = 3)),
+    n_days4 = purrr::map(winter_conditions, ~ n_days(., event = 4)),
+    n_events3 = purrr::map(winter_conditions, ~ n_events(., event = 3)),
+    n_events4 = purrr::map(winter_conditions, ~ n_events(., event = 4)),
+    duration3 = purrr::map(winter_conditions, ~ duration_event(., event = 3)),
+    duration4 = purrr::map(winter_conditions, ~ duration_event(., event = 4))
+  ) \%>\%
   tidyr::unnest(n_days3:n_events4)
 
 n_weather \%>\%

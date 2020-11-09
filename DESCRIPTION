@@ -1,12 +1,20 @@
-Package: winteranalyzer
-Title: Characterizing winter conditions for reindeer husbandry
-Version: 0.0.0.9000
+Package: witch
+Title: WInTer conditions and CHaracterization for reindeer husbandry
+Version: 0.0.1
 Date: 2020-11-05
 Authors@R: 
-    person(given = "Bernardo",
+    c(person(given = "Bernardo",
            family = "Niebuhr",
            role = c("aut", "cre"),
-           email = "bernardo.brandao@slu.se")
+           email = "bernardo.brandao@slu.se"),
+      person(given = "Anna",
+           family = "Skarin",
+           role = c("aut"),
+           email = "anna.skarin@slu.se"),
+      person(given = "Per",
+           family = "Sandström",
+           role = c("aut"),
+           email = "per.sandstrom@slu.se"))
 Description: A set of tools for characterizing winter conditions in the
     context of reindeer husbandry.
 License: GPL-2
@@ -15,8 +23,10 @@ Depends:
 Imports: 
     magrittr, 
     dplyr,
+    ggplot2,
     caTools
+Suggests: knitr, rmarkdown, lubridate, purrr
 RoxygenNote: 7.0.2
-Suggests: knitr, rmarkdown, lubridate
 Encoding: UTF-8
 LazyData: true
+VignetteBuilder: knitr

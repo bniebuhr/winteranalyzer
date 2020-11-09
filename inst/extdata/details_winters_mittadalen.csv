@@ -1,0 +1,14 @@
+winter,year,good_bad_winter,snow,date_start_winter,date_end_winter,observations,construction,check_ok
+2008,2007-2008,medium,NA,2007-11-15,2008-04-15,not much info about the weather conditions,before,ok
+2009,2008-2009,NA,NA,NA,NA,NA,before,ok
+2010,2009-2010,good,normal,2009-12-13,2010-04-05,NA,before,ok
+2011,2010-2011,good,normal,2010-11-14,2011-04-05,NA,before,ok
+2012,2011-2012,medium,less snow,2011-11-30,2012-03-22,"good in the mountains, where there was snow",during,ok
+2013,2012-2013,medium,a lot of snow,2012-11-01,2013-04-03,NA,during,ok
+2014,2013-2014,bad,not much,2013-11-11,2014-03-24,some animals already started migrating around 2014-03-12,during,ok
+2015,2014-2015,bad,not much,2014-11-10,2015-03-18,NA,after,ok
+2016,2015-2016,bad,not much,2015-11-02,2016-04-01,bad grazing areas in the vallyes,after,ok
+2017,2016-2017,bad,a lot of snow,2016-10-23,2017-04-01,"considered bad because there was a lot of snow, but it is different from the previous years",after,ok
+2018,2017-2018,bad/medium,a lot of snow,2017-10-31,2018-04-21,NA,after,ok
+2019,2018-2019,medium,NA,2018-11-05,2019-04-10,NA,after,no
+2020,2019-2020,bad,NA,2019-11-07,2020-04-15,NA,after,no

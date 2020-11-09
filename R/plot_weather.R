@@ -26,7 +26,8 @@ plot_weather <- function(weather_analyzed,
                          add_events = c("", "events3", "events4")[1],
                          first_half = TRUE,
                          cols = c(),
-                         units = c()) {
+                         units = c(),
+                         title = "") {
   # possible terms
   possible_terms <- colnames(weather_analyzed$weather_indices)
 
@@ -40,14 +41,14 @@ plot_weather <- function(weather_analyzed,
 
   # initialize plot
   p <- ggplot(weather_df, aes(date)) +
-    labs(x = "Date", y = "Measure", color = "")
+    labs(x = "Date", y = "Measure", colour = "Variable")
 
   # add each term if this is an argument of the function
   cont <- 1
   for(i in term) {
     index <- which(grepl(i, possible_terms))[1]
     p <- p + geom_line(aes_q(y = as.name(possible_terms[index]),
-                               color = possible_terms[index]))
+                               colour = possible_terms[index]))
 
     if(grepl("ratio", i)) {
       col_number <- which(grepl(i, colnames(weather_df)))
@@ -56,13 +57,23 @@ plot_weather <- function(weather_analyzed,
 
   }
 
-  if(add_events == "events3" | add_events == "events4") {
-    dates <- ifelse(first_half, weather_analyzed[[add_events]]$event_dates_begin,
-                    weather_analyzed[[add_events]]$event_dates)
-    p <- p + geom_vline(xintercept = dates, linetype = 3)
+  # events 3 and 4
+  dates3 <- ifelse(first_half, weather_analyzed[["events3"]]$event_dates_begin,
+                               weather_analyzed[["events3"]]$event_dates)
+  dates4 <- ifelse(first_half, weather_analyzed[["events4"]]$event_dates_begin,
+                   weather_analyzed[["events4"]]$event_dates)
+  # events <- data.frame(dates = c(dates3, dates4), event_type = c(rep("Ice crust 3", length(dates3)),
+  #                                                         rep("Ice crust 4", length(dates4))))
+
+  if("events3" %in% add_events) {
+    p <- p + geom_vline(xintercept = dates3, linetype = 2, colour = "blue")
+      # geom_vline(aes(xintercept = dates, colour = event_type), linetype = 2,
+      #            data = events, show.legend = F)
+  }
+  if("events4" %in% add_events) {
+    p <- p + geom_vline(xintercept = dates4, linetype = 2, colour = "red")
   }
 
-  p
+  p +
+    labs(title = title)
 }
-
-### Add option to select the sequence of colors
