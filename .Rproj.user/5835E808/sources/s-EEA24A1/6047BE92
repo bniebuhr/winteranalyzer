@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1604660084123.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6047BE92",
+    "lastKnownWriteTime" : 1604660389,
+    "last_content_update" : 1604660389237,
+    "path" : "D:/bernardo/00_academico/07_projetos/05_reindeer/winter_conditions/winteranalyzer/R/data_documentation_tassasen.R",
+    "project_path" : "R/data_documentation_tassasen.R",
+    "properties" : {
+        "cursorPosition" : "31,14",
+        "scrollLine" : "18",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

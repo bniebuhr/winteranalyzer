@@ -1,0 +1,56 @@
+
+# 2009, 2010 - good years
+
+# 13, 14 - bad years
+
+# 18, 19 - bad in the begin, good later
+
+#' Analysis of winter conditions based on meteorological variables
+#'
+#' This function calculates some proxies for weather conditions based on
+#' time series of snow depth, precipitation, and minimum, maximum, and average
+#' temperature for a given year.
+#'
+#' @return cum_prec, date_premanent_snow, cum_prec_date_perm_snow,
+#' ratio_cumprec_snow, ratio_snow_cumprec, diff_cumprec_snow,
+#' events 3, events 4 (after date perm snow), n_eve3, n_eve4
+#'
+#' @example examples/winter_analyzer_example.R
+#'
+#' @export
+analyze_weather <- function(date, snow_depth, precipitation,
+                            temp_min, temp_max, temp_avg,
+                            start = c("first_permanent_snow", "first_date", "other date")[1],
+                            plot_first_snow = FALSE,
+                            set_start = NULL, ...) {
+
+  # define starting date
+  if(start == "first_permanent_snow") {
+    start = find_date_permanent_snow(date, snow_depth, plot = plot_first_snow, ...)
+  } else if(start == "other date") {
+    start = find_date_permanent_snow(date, snow_depth, plot = plot_first_snow,
+                                     set_start = set_start, ...)
+  } else {
+    start = date[1]
+  }
+
+  # calculate precipitation and cumulative precipitation from the start date
+  precipitation_start <- ifelse(date < start, 0, precipitation)
+  cum_prec <- cumsum(precipitation_start)
+
+  # calculate indices - ratios and differences of snow depth and cumulative precipitation
+  prec_snow_ratio <- cum_prec/snow_depth
+  prec_snow_diff <- cum_prec - snow_depth
+  snow_prec_ratio <- snow_depth/cum_prec
+  snow_prec_diff <- snow_depth - cum_prec
+
+  # make a data.frame with all
+  weather.indices <- tibble::tibble(date, snow_depth, precipitation_start,
+                                    cumulative_precitation = cum_prec,
+                                    prec_snow_ratio, prec_snow_diff,
+                                    snow_prec_ratio, snow_prec_diff)
+
+  return(weather.indices)
+}
+
+

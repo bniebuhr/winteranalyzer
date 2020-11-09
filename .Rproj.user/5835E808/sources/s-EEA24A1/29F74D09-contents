@@ -1,0 +1,12 @@
+#' Plot weather curves for a given winter
+#'
+#' This function plots weather variables and indices calculated with the function
+#' \code{\link[winteranalyzer]{analyze_weather}}.
+#'
+#' @param weather_analyzed output from the \code{\link[winteranalyzer]{analyze_weather}}
+#' function.
+#'
+#' @export
+plot_weather <- function(weather_analyzed) {
+
+}

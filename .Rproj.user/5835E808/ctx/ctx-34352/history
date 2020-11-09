@@ -1,0 +1,385 @@
+library(winteranalyzer)
+data(weather_mittadalen)
+?weather_mittadalen
+?weather_mittadalen
+data(weather_mittadalen)
+library(ggplot)
+data(weather_mittadalen)
+library(ggplot)
+library(ggplot2)
+data(weather_mittadalen)
+ggplot(weather_mittadalen, aes(date)) +
+facet_wrap(.~year, scales = "free", ncol = 5)+
+geom_line(aes(y = snow_depth, color = "Snow depth (mm)"))  +
+geom_line(aes(y = prec, color = "Precipitation (mm)")) +
+labs(x = "Date", y = "", color = "Measure") +
+theme(legend.position = "bottom")
+library(winteranalyzer)
+data(weather_mittadalen)
+weather_mittadalen
+library(winteranalyzer)
+data("weather_mittadalen")
+library(winteranalyzer)
+data("weather_mittadalen")
+?weather_mittadalen
+library(winteranalyzer)
+?weather_mittadalen
+weather_mittadalen
+7000 * 500
+7000 * 500/1000
+library(winteranalyzer)
+data("weather_mittadalen")
+#
+plot(min.14d, type = "l", main = "Min in 14 days")
+# set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left", ...) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(test2$snow.mysk, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+if(plot = T) {
+# plot
+plot(date, min.given.window, type = "l",
+main = paste("Min in", temp.window.size, "days"))
+lines(date, snow_depth, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend(...)
+}
+# return the start of the first snow
+return(start)
+}
+# set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left", ...) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(test2$snow.mysk, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+if(plot = TRUE) {
+# plot
+plot(date, snow_depth, type = "l")
+lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l")
+lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left", ...) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(test2$snow.mysk, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l")
+lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+data(weather_mittadalen)
+library(dplyr)
+weather_2019 <- weather_mittadalen %>%
+dplyr::filter(year == 2019)
+weather_2019
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14)
+)
+# set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left", ...) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(snow_depth, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l")
+lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+weather_2019 <- weather_mittadalen %>%
+dplyr::filter(year == 2019)
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14))
+# set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left",
+debug = FALSE, ...) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(snow_depth, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l",
+xlab = "Date", ylab = "Snow depth (mm)")
+if(debug) lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+weather_2019 <- weather_mittadalen %>%
+dplyr::filter(year == 2019)
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14))
+library(ggplot2)
+ggplot(aes(date, snow_depth)) +
+geom_line() +
+geom_vline(xintercept = start, linetype = 2) +
+labs(x = "Date", y = "Snow depth (mm)")
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("20191101")))
+#' set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left",
+set_start = NULL, debug = FALSE, ...) {
+if(is.null(set_start)) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(snow_depth, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+} else {
+start = set_start
+}
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l",
+xlab = "Date", ylab = "Snow depth (mm)")
+if(debug) lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("20191101")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("2019-11-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("2019-11-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("2018-11-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::date("2018-11-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd("2018-11-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd("2018-12-01")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd("2018-12-10")))
+if(is.null(set_start)) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(snow_depth, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+} else {
+start <- set_start
+}
+#' set a start date as a possibility
+find_date_permanent_snow <- function(date, snow_depth, plot = TRUE,
+temp.window.size = 14,
+endrule = "min", align = "left",
+set_start = NULL, debug = FALSE, ...) {
+if(is.null(set_start)) {
+# calculate minimum snow depth in a temporal window of defined size
+min.given.window <- caTools::runmin(snow_depth, k = temp.window.size,
+endrule = endrule, align = align, ...)
+# get the date of the first day before permanent snow
+start <- date[first(which(cumsum(min.given.window) > 0))]
+} else {
+start <- set_start
+}
+if(plot == TRUE) {
+# plot
+plot(date, snow_depth, type = "l",
+xlab = "Date", ylab = "Snow depth (mm)")
+if(debug) lines(date, min.given.window, type = "l", col = 2)
+abline(v = start, lty = 2)
+legend("topleft", legend = "start of permanent snow", lty = 2)
+}
+# return the start of the first snow
+return(start)
+}
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd("2018-12-10")))
+abline(lubridate::ymd("20181111"))
+abline(v = lubridate::ymd("20181111"))
+lubridate::ymd("20181111")
+abline(v = lubridate::ymd_h("20181111 00"))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd_h("2018-12-10 00")))
+abline(v = lubridate::ymd_h("20181111 00"))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd_h("2018-11-10 00")))
+# not run
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14,
+set_start = lubridate::ymd_h("2018-11-01 00")))
+?runmin
+library(winteranalyzer)
+library(winteranalyzer)
+?find_date_permanent_snow
+library(winteranalyzer)
+library(winteranalyzer)
+?weather_mittadalen
+library(winteranalyzer)
+?weather_mittadalen
+library(ggplot2)
+data(weather_mittadalen)
+ggplot(weather_mittadalen, aes(date)) +
+facet_wrap(.~year, scales = "free", ncol = 5)+
+geom_line(aes(y = snow_depth, color = "Snow depth (mm)"))  +
+geom_line(aes(y = prec, color = "Precipitation (mm)")) +
+labs(x = "Date", y = "", color = "Measure") +
+theme(legend.position = "bottom")
+?find_date_permanent_snow
+library(winteranalyzer)
+library(winteranalyzer)
+?find_date_permanent_snow
+library(dplyr)
+data(weather_mittadalen)
+weather_2019 <- weather_mittadalen %>%
+dplyr::filter(year == 2019)
+with(weather_2019, find_date_permanent_snow(date, snow_depth, temp.window.size = 14))
+?analyze_weather
+weather.indices <- tibble::tibble(date, snow_depth, precipitation_start,
+cumulative_precitation = cum_prec,
+prec_snow_ratio, prec_snow_diff,
+snow_prec_ratio, snow_prec_diff)
+library(winteranalyzer)
+weather_2019
+library(dplyr)
+data(weather_mittadalen)
+weather_2019 <- weather_mittadalen %>%
+dplyr::filter(year == 2019)
+with(weather_2019, analyze_weather(date, snow_depth, prec, temp_min, temp_max,
+temp_avg, start = "first_permanent_snow",
+plot_first_snow = T))
+weather_condition_2019 <- swith(weather_2019, analyze_weather(date, snow_depth, prec, temp_min, temp_max,
+temp_avg, start = "first_permanent_snow",
+plot_first_snow = T))
+weather_condition_2019 <-
+with(weather_2019, analyze_weather(date, snow_depth, prec, temp_min, temp_max,
+temp_avg, start = "first_permanent_snow",
+plot_first_snow = T))
+weather_condition_2019
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precipitation, color = "cum prec")) +
+geom_line(aes(y = prec_snow_ratio, color = "cum prec/snow depth")) +
+labs(x = "Date", y = "Amount (mm)")
+weather_condition_2019
+weather_condition_2019 %>% colnames()
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = prec_snow_ratio, color = "cum prec/snow depth")) +
+labs(x = "Date", y = "Amount (mm)")
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = 100*prec_snow_ratio, color = "cum prec/snow depth")) +
+labs(x = "Date", y = "Amount (mm)")
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = 100*prec_snow_ratio, color = "100*cum prec/snow depth")) +
+geom_hline(yintercept = 100)
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = 100*prec_snow_ratio, color = "100*cum prec/snow depth")) +
+geom_hline(yintercept = 100, linetype = 2)
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = 100*prec_snow_ratio, color = "100*cum prec/snow depth")) +
+geom_hline(yintercept = 100, linetype = 2) +
+ylim(0, 200) +
+labs(x = "Date", y = "Amount (mm)", color = "")
+weather_condition_2019 %>%
+ggplot(aes(date)) +
+geom_line(aes(y = snow_depth, color = "snow depth")) +
+geom_line(aes(y = cumulative_precitation, color = "cum prec")) +
+geom_line(aes(y = 100*prec_snow_ratio, color = "100*cum prec/snow depth")) +
+geom_hline(yintercept = 100, linetype = 2) +
+ylim(0, 250) +
+labs(x = "Date", y = "Amount (mm)", color = "")
+library(winteranalyzer)
+library(winteranalyzer)
+?analyze_weather
+?find_date_permanent_snow
+library(winteranalyzer)
+data(weather_tassasen)
+ggplot(weather_tassasen, aes(date)) +
+facet_wrap(.~year, scales = "free", ncol = 5)+
+geom_line(aes(y = snow_depth, color = "Snow depth (mm)"))  +
+geom_line(aes(y = prec, color = "Precipitation (mm)")) +
+labs(x = "Date", y = "", color = "Measure") +
+theme(legend.position = "bottom")
+data(weather_mittadalen)
+ggplot(weather_mittadalen, aes(date)) +
+facet_wrap(.~year, scales = "free", ncol = 5)+
+geom_line(aes(y = snow_depth, color = "Snow depth (mm)"))  +
+geom_line(aes(y = prec, color = "Precipitation (mm)")) +
+labs(x = "Date", y = "", color = "Measure") +
+theme(legend.position = "bottom")
+?data_tassasen
+library(winteranalyzer)
+?data_tassasen
+?data_mittadalen
+library(winteranalyzer)
+?data_tassasen
+library(winteranalyzer)
+?data_tassasen
+?data_mittadalen
+?plot_weather

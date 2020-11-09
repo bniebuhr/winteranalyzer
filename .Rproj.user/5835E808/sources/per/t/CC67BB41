@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1604935937028.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1343218809",
+    "id" : "CC67BB41",
+    "lastKnownWriteTime" : 1604935828,
+    "last_content_update" : 1604935828,
+    "path" : "D:/bernardo/00_academico/07_projetos/05_reindeer/winter_conditions/witch/vignettes/winter_mittadalen.Rmd",
+    "project_path" : "vignettes/winter_mittadalen.Rmd",
+    "properties" : {
+        "cursorPosition" : "1,46",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

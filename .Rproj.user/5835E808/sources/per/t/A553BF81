@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1604683906529.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2776001524",
+    "id" : "A553BF81",
+    "lastKnownWriteTime" : 1604934895,
+    "last_content_update" : 1604934895,
+    "path" : "D:/bernardo/00_academico/07_projetos/05_reindeer/winter_conditions/witch/R/to_do.R",
+    "project_path" : "R/to_do.R",
+    "properties" : {
+        "cursorPosition" : "3,14",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

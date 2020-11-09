@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1604590446428.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "93187CC4",
+    "lastKnownWriteTime" : 1604615474,
+    "last_content_update" : 1604615474109,
+    "path" : "D:/bernardo/00_academico/07_projetos/05_reindeer/winter_conditions/winteranalyzer/R/analyze_weather.R",
+    "project_path" : "R/analyze_weather.R",
+    "properties" : {
+        "cursorPosition" : "15,46",
+        "scrollLine" : "10"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

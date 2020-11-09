@@ -1,0 +1,22 @@
+Package: winteranalyzer
+Title: Characterizing winter conditions for reindeer husbandry
+Version: 0.0.0.9000
+Date: 2020-11-05
+Authors@R: 
+    person(given = "Bernardo",
+           family = "Niebuhr",
+           role = c("aut", "cre"),
+           email = "bernardo.brandao@slu.se")
+Description: A set of tools for characterizing winter conditions in the
+    context of reindeer husbandry.
+License: GPL-2
+Depends:
+    R (>= 3.3.0)
+Imports: 
+    magrittr, 
+    dplyr,
+    caTools
+RoxygenNote: 7.0.2
+Suggests: knitr, rmarkdown, lubridate
+Encoding: UTF-8
+#LazyData: true
