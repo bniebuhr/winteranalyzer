@@ -9,7 +9,7 @@ To install the package, you can use the function `devtools::install_github()`, a
 
 ```{r}
 library(devtools)
-devtools::install_github("https://github.com/bniebuhr/witch.git")
+devtools::install_github(repo = "https://github.com/bniebuhr/witch.git", ref = "HEAD")
 ```
 Then you can load the package:
 
