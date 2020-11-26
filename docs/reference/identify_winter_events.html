@@ -134,24 +134,24 @@ Lundqvist et al. (2007). The functions uses daily temperature (min, max, or aver
 precipitation (in mm) to identify events that may be harsh weather conditions for reindeer husbandry.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>identify_winter_event3</span>(
-  <span class='no'>date</span>,
-  <span class='no'>temp_min</span>,
-  <span class='no'>temp_max</span>,
-  <span class='no'>precipitation</span>,
-  <span class='kw'>temp_min_thr</span> <span class='kw'>=</span> -<span class='fl'>2</span>,
-  <span class='kw'>temp_max_thr</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>prec_thr</span> <span class='kw'>=</span> <span class='fl'>3</span>
-)
+    <pre class="usage"><span class='fu'>identify_winter_event3</span><span class='op'>(</span>
+  <span class='va'>date</span>,
+  <span class='va'>temp_min</span>,
+  <span class='va'>temp_max</span>,
+  <span class='va'>precipitation</span>,
+  temp_min_thr <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>,
+  temp_max_thr <span class='op'>=</span> <span class='fl'>2</span>,
+  prec_thr <span class='op'>=</span> <span class='fl'>3</span>
+<span class='op'>)</span>
 
-<span class='fu'>identify_winter_event4</span>(
-  <span class='no'>date</span>,
-  <span class='no'>temp_avg</span>,
-  <span class='no'>precipitation</span>,
-  <span class='kw'>temp_avg_day</span> <span class='kw'>=</span> +<span class='fl'>1</span>,
-  <span class='kw'>temp_avg_next_day</span> <span class='kw'>=</span> -<span class='fl'>1</span>,
-  <span class='kw'>prec_thr</span> <span class='kw'>=</span> <span class='fl'>3</span>
-)</pre>
+<span class='fu'>identify_winter_event4</span><span class='op'>(</span>
+  <span class='va'>date</span>,
+  <span class='va'>temp_avg</span>,
+  <span class='va'>precipitation</span>,
+  temp_avg_day <span class='op'>=</span> <span class='op'>+</span><span class='fl'>1</span>,
+  temp_avg_next_day <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>,
+  prec_thr <span class='op'>=</span> <span class='fl'>3</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,7 +200,7 @@ precipitation (in mm) to identify events that may be harsh weather conditions fo
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with the elements:</p><dl'>
+    <p>A list with the elements:</p><dl>
   <dt>events</dt><dd><p>time series with 0 for days with no event and 1 with days when the event occurred.</p></dd>
   <dt>n_days</dt><dd><p>number of days when the event occurred.</p></dd>
   <dt>n_events</dt><dd><p>number of events, by aggregating subsequent days when it repeatedly happened.</p></dd>
@@ -221,15 +221,16 @@ precipitation (in mm) to identify events that may be harsh weather conditions fo
 conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>weather_mittadalen</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>weather_mittadalen</span><span class='op'>)</span>
 
-<span class='no'>weather</span> <span class='kw'>&lt;-</span> <span class='no'>weather_mittadalen</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2014</span>)
+<span class='va'>weather</span> <span class='op'>&lt;-</span> <span class='va'>weather_mittadalen</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2014</span><span class='op'>)</span>
 
 <span class='co'># events 3</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>weather</span>, <span class='fu'>identify_winter_event3</span>(<span class='no'>date</span>, <span class='no'>temp_min</span>, <span class='no'>temp_max</span>, <span class='no'>prec</span>))</div><div class='output co'>#&gt; $events3
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather</span>, <span class='fu'>identify_winter_event3</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>temp_min</span>, <span class='va'>temp_max</span>, <span class='va'>prec</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $events3
 #&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0
 #&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt;  [75] 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
@@ -286,7 +287,8 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 #&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; </div><div class='input'>
 <span class='co'># events 4</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>weather</span>, <span class='fu'>identify_winter_event4</span>(<span class='no'>date</span>, <span class='no'>temp_avg</span>, <span class='no'>prec</span>))</div><div class='output co'>#&gt; $events4
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather</span>, <span class='fu'>identify_winter_event4</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>temp_avg</span>, <span class='va'>prec</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $events4
 #&gt;   [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 #&gt;  [26]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 #&gt;  [51]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
@@ -346,21 +348,22 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 #&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; </div><div class='input'>
 <span class='co'># visualize events 4 for this year</span>
-<span class='no'>weather_condition</span> <span class='kw'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>weather</span>, <span class='fu'><a href='analyze_weather.html'>analyze_weather</a></span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='no'>prec</span>, <span class='no'>temp_min</span>, <span class='no'>temp_max</span>,
-                                     <span class='no'>temp_avg</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='st'>"first_date"</span>,
-                                     <span class='kw'>plot_first_snow</span> <span class='kw'>=</span> <span class='no'>T</span>))
+<span class='va'>weather_condition</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather</span>, <span class='fu'><a href='analyze_weather.html'>analyze_weather</a></span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>snow_depth</span>, <span class='va'>prec</span>, <span class='va'>temp_min</span>, <span class='va'>temp_max</span>,
+                                     <span class='va'>temp_avg</span>, start <span class='op'>=</span> <span class='st'>"first_date"</span>,
+                                     plot_first_snow <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='no'>to_plot</span> <span class='kw'>&lt;-</span> <span class='no'>weather_condition</span>
+<span class='va'>to_plot</span> <span class='op'>&lt;-</span> <span class='va'>weather_condition</span>
 
-<span class='no'>to_plot</span>$<span class='no'>weather_indices</span> <span class='kw'>&lt;-</span> <span class='no'>weather_condition</span>$<span class='no'>weather_indices</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>temp_avg_next</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>temp_avg</span>[-<span class='fl'>1</span>], <span class='fl'>NA</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw pkg'>lubridate</span><span class='kw ns'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/month.html'>month</a></span>(<span class='no'>date</span>) <span class='kw'>==</span> <span class='fl'>12</span>)
+<span class='va'>to_plot</span><span class='op'>$</span><span class='va'>weather_indices</span> <span class='op'>&lt;-</span> <span class='va'>weather_condition</span><span class='op'>$</span><span class='va'>weather_indices</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>temp_avg_next <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>temp_avg</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>]</span>, <span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>lubridate</span><span class='fu'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/month.html'>month</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span> <span class='op'>==</span> <span class='fl'>12</span><span class='op'>)</span>
 
-<span class='no'>to_plot</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='plot_weather.html'>plot_weather</a></span>(<span class='kw'>term</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"temp_avg"</span>, <span class='st'>"prec"</span>, <span class='st'>"temp_avg_next"</span>), <span class='kw'>factor_mult</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>1</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span>(<span class='kw'>yintercept</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>1</span>,<span class='fl'>1</span>), <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span>(-<span class='fl'>10</span>, <span class='fl'>5</span>)</div><div class='img'><img src='identify_winter_events-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='va'>to_plot</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='plot_weather.html'>plot_weather</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"temp_avg"</span>, <span class='st'>"prec"</span>, <span class='st'>"temp_avg_next"</span><span class='op'>)</span>, factor_mult <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_hline</a></span><span class='op'>(</span>yintercept <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span>, linetype <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/lims.html'>ylim</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>10</span>, <span class='fl'>5</span><span class='op'>)</span>
+</div><div class='img'><img src='identify_winter_events-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -376,7 +379,7 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

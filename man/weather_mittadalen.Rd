@@ -4,7 +4,8 @@
 \name{weather_mittadalen}
 \alias{weather_mittadalen}
 \title{Winter weather data for Mittadalen}
-\format{A data frame with 7 variables:
+\format{
+A data frame with 7 variables:
 \describe{
   \item{date}{date of the record}
   \item{year}{year of the record}
@@ -13,7 +14,8 @@
   \item{temp_min}{minimum daily temperature in degrees Celcius, measured in Dravagen}
   \item{temp_max}{maximum daily temperature in degrees Celcius, measured in Dravagen}
   \item{temp_avg}{average daily temperature in degrees Celcius, measured in Dravagen}
-}}
+}
+}
 \source{
 \url{https://www.smhi.se/}
 }

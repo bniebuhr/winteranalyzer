@@ -136,17 +136,17 @@ minimum amount of snow in a window of a given temporal length to check if,
 after a given snow event, there was melting and the snow vanished.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>find_date_permanent_snow</span>(
-  <span class='no'>date</span>,
-  <span class='no'>snow_depth</span>,
-  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>temp.window.size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>endrule</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"min"</span>, <span class='st'>"NA"</span>, <span class='st'>"trim"</span>, <span class='st'>"keep"</span>, <span class='st'>"constant"</span>, <span class='st'>"func"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>align</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"left"</span>, <span class='st'>"center"</span>, <span class='st'>"right"</span>)[<span class='fl'>1</span>],
-  <span class='kw'>set_start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>find_date_permanent_snow</span><span class='op'>(</span>
+  <span class='va'>date</span>,
+  <span class='va'>snow_depth</span>,
+  plot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  temp.window.size <span class='op'>=</span> <span class='fl'>14</span>,
+  endrule <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"min"</span>, <span class='st'>"NA"</span>, <span class='st'>"trim"</span>, <span class='st'>"keep"</span>, <span class='st'>"constant"</span>, <span class='st'>"func"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+  align <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"left"</span>, <span class='st'>"center"</span>, <span class='st'>"right"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+  set_start <span class='op'>=</span> <span class='cn'>NULL</span>,
+  debug <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,16 +201,18 @@ minimum filtering. Default is FALSE.</p></td>
     <p>Date object. Start date of the permanent snow in a winter.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>weather_mittadalen</span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>weather_mittadalen</span><span class='op'>)</span>
 
-<span class='no'>weather_2019</span> <span class='kw'>&lt;-</span> <span class='no'>weather_mittadalen</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>year</span> <span class='kw'>==</span> <span class='fl'>2019</span>)
+<span class='va'>weather_2019</span> <span class='op'>&lt;-</span> <span class='va'>weather_mittadalen</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2019</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>weather_2019</span>, <span class='fu'>find_date_permanent_snow</span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='kw'>temp.window.size</span> <span class='kw'>=</span> <span class='fl'>14</span>))</div><div class='img'><img src='find_date_permanent_snow-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "2018-12-04 UTC"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather_2019</span>, <span class='fu'>find_date_permanent_snow</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>snow_depth</span>, temp.window.size <span class='op'>=</span> <span class='fl'>14</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='find_date_permanent_snow-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "2018-12-04 UTC"</div><div class='input'>
 <span class='co'># not run</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>weather_2019</span>, <span class='fu'>find_date_permanent_snow</span>(<span class='no'>date</span>, <span class='no'>snow_depth</span>, <span class='kw'>temp.window.size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-                                            <span class='kw'>set_start</span> <span class='kw'>=</span> <span class='kw pkg'>lubridate</span><span class='kw ns'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/ymd_hms.html'>ymd_h</a></span>(<span class='st'>"2018-11-01 00"</span>)))</div><div class='img'><img src='find_date_permanent_snow-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "2018-11-01 UTC"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather_2019</span>, <span class='fu'>find_date_permanent_snow</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>snow_depth</span>, temp.window.size <span class='op'>=</span> <span class='fl'>14</span>,
+                                            set_start <span class='op'>=</span> <span class='fu'>lubridate</span><span class='fu'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/ymd_hms.html'>ymd_h</a></span><span class='op'>(</span><span class='st'>"2018-11-01 00"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='find_date_permanent_snow-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] "2018-11-01 UTC"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -227,7 +229,7 @@ minimum filtering. Default is FALSE.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

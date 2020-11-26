@@ -18,3 +18,9 @@ plot_weather(weather_condition_2019, term = c("snow_de", "cum", "snow_prec_ratio
              factor_mult = c(1,1,100))
 plot_weather(weather_condition_2019, term = c("snow_de", "cum", "snow_prec_ratio"),
              factor_mult = c(.01,.01,1), add_events = "events3")
+
+# configure details in your plot using further ggplot2 functions
+plot_weather(weather_condition_2019, term = c("snow_de", "cum"), add_events = "events3") +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  labs(y = "Weather variable value")

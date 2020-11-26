@@ -75,13 +75,14 @@
 
       
 
-      </header><div class="row">
+      </header><script src="a01_witch_start_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="a01_witch_start_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="a01_witch_start_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Starting with witch: winter conditions and characterization</h1>
                         <h4 class="author">Bernardo Brandão Niebuhr</h4>
             
-            <h4 class="date">2020-11-09</h4>
+            <h4 class="date">2020-11-26</h4>
       
       
       <div class="hidden name"><code>a01_witch_start.Rmd</code></div>
@@ -94,19 +95,21 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the package using <code><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">devtools::install_github()</a></code> function, then load the package using the function <code>library()</code>. We also load the <code>tidyverse</code> set of packages that is useful for data manipulation and plotting in this vignette.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># devtools::install_github("https://github.com/bniebuhr/witch.git")</span>
+<p>You can install the package using <code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github()</a></code> function, then load the package using the function <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. We also load the <code>tidyverse</code> set of packages that is useful for data manipulation and plotting in this vignette.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># devtools::install_github("https://github.com/bniebuhr/witch.git")</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">witch</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></body></html></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">witch</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data" class="anchor"></a>Data</h2>
 <p>To understand what data is used in the analysis, we’ll take a look at the dataset <code>weather_mittadalen</code>. This corresponds to weather data collected in meteorological stations in to Mittådalen Sami reindeer herding district, in Sweden. It contains time series of daily snow_depth, precipitation, and minimum, maximum, and average temperature, from winters in the period 2008-2020. To know more information about the dataset, see <code><a href="../reference/weather_mittadalen.html">?weather_mittadalen</a></code>. There is also another dataset from a neighboring Sami district, Tåssåsen, called <code>weather_tassasen</code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">weather_mittadalen</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">weather_mittadalen</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">weather_mittadalen</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">weather_mittadalen</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 7</span>
 <span class="co">#&gt;   date                 year snow_depth  prec temp_min temp_max temp_avg</span>
 <span class="co">#&gt;   &lt;dttm&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
@@ -115,7 +118,7 @@
 <span class="co">#&gt; 3 2007-10-03 00:00:00  2008         NA   0        0.2     13.1       NA</span>
 <span class="co">#&gt; 4 2007-10-04 00:00:00  2008         NA   0       -2.6     11         NA</span>
 <span class="co">#&gt; 5 2007-10-05 00:00:00  2008         NA   0       -2.9     12.3       NA</span>
-<span class="co">#&gt; 6 2007-10-06 00:00:00  2008         NA   0       -4.5     12.8       NA</span></pre></body></html></div>
+<span class="co">#&gt; 6 2007-10-06 00:00:00  2008         NA   0       -4.5     12.8       NA</span></code></pre></div>
 </div>
 <div id="some-indices-that-may-indicate-winter-conditions" class="section level2">
 <h2 class="hasAnchor">
@@ -127,7 +130,7 @@
 <a href="#analyzing-weather-conditions" class="anchor"></a>Analyzing weather conditions</h2>
 <p>The main function of the package is called <code>analyze_weather</code>. It calculates cumulative precipitation, the ratio between cumulative precipitation and snow depth, and identifies events 3 and 4 according to Lundqvist et al (2007), which represent possible formations of ice crust layers, which make it difficult for reindeer to forage and find food.</p>
 <p>The function can wither analyze the whole time series of the winter consider only what comes after the first permanent snow. Maybe both things can be important for understanding whether the weather was good or bad in a given winter. The identification of the first permanent snow is done by the function <code><a href="../reference/find_date_permanent_snow.html">find_date_permanent_snow()</a></code>.</p>
-<p>The function <code><a href="../reference/analyze_weather.html">analyze_weather()</a></code> also uses the functions <code><a href="../reference/identify_winter_events.html">identify_winter_event3()</a></code> and <code><a href="../reference/identify_winter_events.html">identify_winter_event4()</a></code> to identify these events aforementioned.</p>
+<p>The function <code><a href="../reference/analyze_weather.html">analyze_weather()</a></code> also uses the functions <code><a href="../reference/identify_winter_event3.html">identify_winter_event3()</a></code> and <code><a href="../reference/identify_winter_event3.html">identify_winter_event4()</a></code> to identify these events aforementioned.</p>
 <p>Once these analyses are done, beyond looking into values, the function <code><a href="../reference/plot_weather.html">plot_weather()</a></code> may be used to explore relationships between the input and derived variables.</p>
 </div>
 <div id="an-example" class="section level1">
@@ -137,11 +140,12 @@
 <h2 class="hasAnchor">
 <a href="#select-a-year-of-data" class="anchor"></a>Select a year of data</h2>
 <p>First we select a given year of data, 2014, to understand how the analysis work. According the reindeer herders from this district, this was a hard year because of the harsh weather conditions.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># select one year</span>
-<span class="no">weather</span> <span class="kw">&lt;-</span> <span class="no">weather_mittadalen</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">year</span> <span class="kw">==</span> <span class="fl">2014</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select one year</span>
+<span class="va">weather</span> <span class="op">&lt;-</span> <span class="va">weather_mittadalen</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2014</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">weather</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">weather</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 7</span>
 <span class="co">#&gt;   date                 year snow_depth  prec temp_min temp_max temp_avg</span>
 <span class="co">#&gt;   &lt;dttm&gt;              &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
@@ -150,15 +154,17 @@
 <span class="co">#&gt; 3 2013-10-03 00:00:00  2014          0   0       -4.4      9.4      3.5</span>
 <span class="co">#&gt; 4 2013-10-04 00:00:00  2014          0   0.2      1.5      7        4.4</span>
 <span class="co">#&gt; 5 2013-10-05 00:00:00  2014          0   0.5      3.9     10.4      6  </span>
-<span class="co">#&gt; 6 2013-10-06 00:00:00  2014          0   0.7     -3        9.6      4.3</span></pre></body></html></div>
+<span class="co">#&gt; 6 2013-10-06 00:00:00  2014          0   0.7     -3        9.6      4.3</span></code></pre></div>
 <p>Then we run the function to analyze the weather conditions in this winter.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># analyze weather</span>
-<span class="no">weather_condition</span> <span class="kw">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span>(<span class="no">weather</span>,
-       <span class="fu"><a href="../reference/analyze_weather.html">analyze_weather</a></span>(<span class="no">date</span>, <span class="no">snow_depth</span>, <span class="no">prec</span>, <span class="no">temp_min</span>, <span class="no">temp_max</span>, <span class="no">temp_avg</span>,
-                       <span class="kw">start</span> <span class="kw">=</span> <span class="st">"first_permanent_snow"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># analyze weather</span>
+<span class="va">weather_condition</span> <span class="op">&lt;-</span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">weather</span>, 
+       <span class="fu"><a href="../reference/analyze_weather.html">analyze_weather</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">snow_depth</span>, <span class="va">prec</span>, <span class="va">temp_min</span>, <span class="va">temp_max</span>, <span class="va">temp_avg</span>, 
+                       start <span class="op">=</span> <span class="st">"first_permanent_snow"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>When we look at the results, we see a table with time series of input and derived variables calculated, as well as some summaries of the number of events and duration of events 3 and 4.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">weather_condition</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">weather_condition</span>
 <span class="co">#&gt; $weather_indices</span>
 <span class="co">#&gt; # A tibble: 212 x 13</span>
 <span class="co">#&gt;    date                snow_depth precipitation_s~ temp_min temp_max temp_avg</span>
@@ -293,46 +299,49 @@
 <span class="co">#&gt;  [75] 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
-<span class="co">#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span></pre></body></html></div>
+<span class="co">#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span></code></pre></div>
 <p>To further explore these results, we first look into the formation of ice crust using the type of event 3. If we want to know the total number of days when there was ice crust formation, the number of events, and the duration of these events, we can use the functions <code><a href="../reference/analyze_weather.html">n_days()</a></code>, <code><a href="../reference/analyze_weather.html">n_events()</a></code>, and <code><a href="../reference/analyze_weather.html">duration_event()</a></code>. These functions can be calculated for the whole winter or only for the first half of the winter, if the argument <code>first_half = TRUE</code>. This is interesting because the formation of ice crust under or above the snow is generally more critical for reindeer and reindeer herders in the beginning of the winter season.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="co"># number of days of events 3</span>
-<span class="fu"><a href="../reference/analyze_weather.html">n_days</a></span>(<span class="no">weather_condition</span>, <span class="kw">event</span> <span class="kw">=</span> <span class="fl">3</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># number of days of events 3</span>
+<span class="fu"><a href="../reference/analyze_weather.html">n_days</a></span><span class="op">(</span><span class="va">weather_condition</span>, event <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2</span>
 <span class="co"># but if we condider the whole winter, there is one event more</span>
-<span class="fu"><a href="../reference/analyze_weather.html">n_days</a></span>(<span class="no">weather_condition</span>, <span class="kw">event</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">first_half</span> <span class="kw">=</span> <span class="no">F</span>)
+<span class="fu"><a href="../reference/analyze_weather.html">n_days</a></span><span class="op">(</span><span class="va">weather_condition</span>, event <span class="op">=</span> <span class="fl">3</span>, first_half <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="co">#&gt; [1] 3</span>
 
 <span class="co"># number of events of type 3</span>
-<span class="fu"><a href="../reference/analyze_weather.html">n_events</a></span>(<span class="no">weather_condition</span>, <span class="kw">event</span> <span class="kw">=</span> <span class="fl">3</span>)
+<span class="fu"><a href="../reference/analyze_weather.html">n_events</a></span><span class="op">(</span><span class="va">weather_condition</span>, event <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; [1] 2</span>
 <span class="co"># duration of events</span>
-<span class="fu"><a href="../reference/analyze_weather.html">duration_event</a></span>(<span class="no">weather_condition</span>, <span class="kw">event</span> <span class="kw">=</span> <span class="fl">3</span>)
-<span class="co">#&gt; [1] 1 1</span></pre></body></html></div>
+<span class="fu"><a href="../reference/analyze_weather.html">duration_event</a></span><span class="op">(</span><span class="va">weather_condition</span>, event <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt; [1] 1 1</span></code></pre></div>
 <p>Other information can be obtained from the output of the <code><a href="../reference/analyze_weather.html">analyze_weather()</a></code> functions. For example, we can have the date when each event starts.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">weather_condition</span>$<span class="no">events3</span>$<span class="no">event_dates</span>
-<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-24 UTC" "2014-03-14 UTC"</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">weather_condition</span><span class="op">$</span><span class="va">events3</span><span class="op">$</span><span class="va">event_dates</span>
+<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-24 UTC" "2014-03-14 UTC"</span></code></pre></div>
 <p>We can also count the number of events 4, for instance. In this year, there was a single event, in December. We will plot it to see the day when the temperature drops from more than +1°C to less than -1°C in the following day, and when the precipitation is higher than 3mm, which are the conditions for event 4.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># we can also calculate the number of events 4</span>
-<span class="fu"><a href="../reference/analyze_weather.html">n_events</a></span>(<span class="no">weather_condition</span>, <span class="kw">event</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">first_half</span> <span class="kw">=</span> <span class="no">T</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># we can also calculate the number of events 4</span>
+<span class="fu"><a href="../reference/analyze_weather.html">n_events</a></span><span class="op">(</span><span class="va">weather_condition</span>, event <span class="op">=</span> <span class="fl">4</span>, first_half <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="co">#&gt; [1] 1</span>
 
 <span class="co"># copy output object</span>
-<span class="no">to_plot</span> <span class="kw">&lt;-</span> <span class="no">weather_condition</span>
+<span class="va">to_plot</span> <span class="op">&lt;-</span> <span class="va">weather_condition</span>
 <span class="co"># have a time series for the following day and</span>
 <span class="co"># select only the month of december to ease visualization</span>
-<span class="no">to_plot</span>$<span class="no">weather_indices</span> <span class="kw">&lt;-</span> <span class="no">to_plot</span>$<span class="no">weather_indices</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">temp_avg_next</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="no">temp_avg</span>[-<span class="fl">1</span>], <span class="fl">NA</span>)) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw pkg">lubridate</span><span class="kw ns">::</span><span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span>(<span class="no">date</span>) <span class="kw">==</span> <span class="fl">12</span>)
+<span class="va">to_plot</span><span class="op">$</span><span class="va">weather_indices</span> <span class="op">&lt;-</span> <span class="va">to_plot</span><span class="op">$</span><span class="va">weather_indices</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>temp_avg_next <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">temp_avg</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">==</span> <span class="fl">12</span><span class="op">)</span>
 
-<span class="no">when_event4</span> <span class="kw">&lt;-</span> <span class="no">weather_condition</span>$<span class="no">events4</span>$<span class="no">event_dates_begin</span>
+<span class="va">when_event4</span> <span class="op">&lt;-</span> <span class="va">weather_condition</span><span class="op">$</span><span class="va">events4</span><span class="op">$</span><span class="va">event_dates_begin</span>
 
 <span class="co"># function plot_weather, explained below</span>
-<span class="no">to_plot</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"temp_avg"</span>, <span class="st">"prec"</span>, <span class="st">"temp_avg_next"</span>)) +
-  <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">1</span>,<span class="fl">1</span>), <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">2</span>) +
-  <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">2</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"darkgreen"</span>) +
-  <span class="fu">geom_vline</span>(<span class="kw">xintercept</span> <span class="kw">=</span> <span class="no">when_event4</span>, <span class="kw">linetype</span> <span class="kw">=</span> <span class="fl">3</span>) +
-  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(-<span class="fl">10</span>, <span class="fl">5</span>)</pre></body></html></div>
+<span class="va">to_plot</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span>term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"temp_avg"</span>, <span class="st">"prec"</span>, <span class="st">"temp_avg_next"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">3</span>, linetype <span class="op">=</span> <span class="fl">2</span>, color <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">when_event4</span>, linetype <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>In the plot above, the horizontal lines represent the limits of +1 and +1°C for temperature and 3 mm for precipitation, and the verical line represents the date the date when the ice crust (event 4) was formed. This figure uses the function <code><a href="../reference/plot_weather.html">plot_weather()</a></code>, that we explain below.</p>
 </div>
@@ -340,24 +349,29 @@
 <h2 class="hasAnchor">
 <a href="#plotting-variables" class="anchor"></a>Plotting variables</h2>
 <p>To plot variables, we use the function <code><a href="../reference/plot_weather.html">plot_weather()</a></code>. Below we plot some of the input and derived variables for this winter.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Snow depth and precipitation</span>
-<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="no">weather_condition</span>, <span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"snow_depth"</span>, <span class="st">"precip"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Snow depth and precipitation</span>
+<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span><span class="va">weather_condition</span>, term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"snow_depth"</span>, <span class="st">"precip"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Snow depth and cumulative precipitation</span>
-<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="no">weather_condition</span>, <span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"snow_de"</span>, <span class="st">"cum"</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span><span class="va">weather_condition</span>, term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"snow_de"</span>, <span class="st">"cum"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-9-2.png" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Snow depth and cumulative precipitation, showing when the events 3 happened</span>
-<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="no">weather_condition</span>, <span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"snow_de"</span>, <span class="st">"cum"</span>), <span class="kw">add_events</span> <span class="kw">=</span> <span class="st">"events3"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span><span class="va">weather_condition</span>, term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"snow_de"</span>, <span class="st">"cum"</span><span class="op">)</span>, add_events <span class="op">=</span> <span class="st">"events3"</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-9-3.png" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Snow depth, cumulative precipitation, and the ratio snow_depth/cumulative_precipitation</span>
-<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="no">weather_condition</span>, <span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"snow_de"</span>, <span class="st">"cum"</span>, <span class="st">"snow_prec_ratio"</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span><span class="va">weather_condition</span>, term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"snow_de"</span>, <span class="st">"cum"</span>, <span class="st">"snow_prec_ratio"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-9-4.png" width="576" style="display: block; margin: auto;"></p>
 <p>In the last plot it is almost impossible to observe the ratio between the variables, because the scale is very small compared to the input variables. In this case, we can add a multiplication factor for each term. For instance, we can divide snow depth and precipitation for 100 to represent them in meters instead of milimiters, as we do below.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span>(<span class="no">weather_condition</span>, <span class="kw">term</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"snow_de"</span>, <span class="st">"cum"</span>, <span class="st">"snow_prec_ratio"</span>),
-             <span class="kw">factor_mult</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">.01</span>,<span class="fl">.01</span>,<span class="fl">1</span>), <span class="kw">add_events</span> <span class="kw">=</span> <span class="st">"events3"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_weather.html">plot_weather</a></span><span class="op">(</span><span class="va">weather_condition</span>, term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"snow_de"</span>, <span class="st">"cum"</span>, <span class="st">"snow_prec_ratio"</span><span class="op">)</span>,
+             factor_mult <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.01</span>,<span class="fl">.01</span>,<span class="fl">1</span><span class="op">)</span>, add_events <span class="op">=</span> <span class="st">"events3"</span><span class="op">)</span></code></pre></div>
 <p><img src="a01_witch_start_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -386,7 +400,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
