@@ -24,7 +24,7 @@ plot_weather <- function(weather_analyzed,
                                    "cumulative_precitation", "prec_snow_ratio", "prec_snow_diff",
                                    "snow_prec_ratio", "snow_prec_diff")[c(1,2)],
                          factor_mult = rep(1, length(term)),
-                         add_events = c("", "events3", "events4")[1],
+                         add_events = c("", "events3", "events4", "eventsX")[1],
                          first_half = TRUE,
                          cols = c(),
                          units = c(),
@@ -59,10 +59,21 @@ plot_weather <- function(weather_analyzed,
   }
 
   # events 3 and 4
-  dates3 <- ifelse(first_half, weather_analyzed[["events3"]]$event_dates_begin,
-                               weather_analyzed[["events3"]]$event_dates)
-  dates4 <- ifelse(first_half, weather_analyzed[["events4"]]$event_dates_begin,
-                   weather_analyzed[["events4"]]$event_dates)
+  if(first_half) {
+    dates3 <- weather_analyzed[["events3"]]$event_dates_begin
+    dates4 <- weather_analyzed[["events4"]]$event_dates_begin
+    datesX <- weather_analyzed[["eventsX"]]$event_dates_begin
+  } else {
+    dates3 <- weather_analyzed[["events3"]]$event_dates
+    dates4 <- weather_analyzed[["events4"]]$event_dates
+    datesX <- weather_analyzed[["eventsX"]]$event_dates
+  }
+  # dates3 <- ifelse(first_half, weather_analyzed[["events3"]]$event_dates_begin,
+  #                              weather_analyzed[["events3"]]$event_dates)
+  # dates4 <- ifelse(first_half, weather_analyzed[["events4"]]$event_dates_begin,
+  #                  weather_analyzed[["events4"]]$event_dates)
+  # datesX <- if_else(rep(first_half, 2), weather_analyzed[["eventsX"]]$event_dates_begin,
+  #                  weather_analyzed[["eventsX"]]$event_dates)
   # events <- data.frame(dates = c(dates3, dates4), event_type = c(rep("Ice crust 3", length(dates3)),
   #                                                         rep("Ice crust 4", length(dates4))))
 
@@ -73,6 +84,9 @@ plot_weather <- function(weather_analyzed,
   }
   if("events4" %in% add_events) {
     p <- p + geom_vline(xintercept = dates4, linetype = 2, colour = "red")
+  }
+  if("eventsX" %in% add_events) {
+    p <- p + geom_vline(xintercept = datesX, linetype = 2, colour = "darkgreen")
   }
 
   p +

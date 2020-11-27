@@ -6,9 +6,12 @@
 #'
 #' @details
 #' The events are:
-#'   * Events 1 and 2 are still to be implemented;
-#'   * Event 3: Day when max temp > 2, min temp < -2, and precipitation > 3 mm;
-#'   * Event 4: Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.
+#' \describe{
+#'   \item{Events 1 and 2}{Still to be implemented}
+#'   \item{Event 3}{Day when max temp > 2, min temp < -2, and precipitation > 3 mm.}
+#'   \item{Event 4}{Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.}
+#'   \item{Event X}{Day when max temp > 1, precipitation > 3 mm, followed minimum temp < -2 in any of the following 3 days.}
+#'   }
 #'
 #' @param date date object. vector. Vector of dates in a time series of a given winter.
 #' @param temp_min numeric. vector. Minimum daily temperature, in Celsius.
@@ -82,7 +85,7 @@ identify_winter_event3 <- function(date, temp_min, temp_max, precipitation,
   n_event3_date_begin <- rep(sequence_events3_begin, events_temp_begin$lengths)
   # dates of the start of the events
   start_index_begin <- c(1, 1 + cumsum(events_temp_begin$lengths))
-  start_index_event3_begin <- start_index[-length(start_index)][events_temp_begin$values > 0]
+  start_index_event3_begin <- start_index_begin[-length(start_index_begin)][events_temp_begin$values > 0]
   event_dates_begin <- date[start_index_event3_begin]
 
   return(list(events3 = event3, n_days = n_days, n_events3 = n_events3,
@@ -144,7 +147,7 @@ identify_winter_event4 <- function(date, temp_avg, precipitation,
   n_event4_date_begin <- rep(sequence_events4_begin, events_temp_begin$lengths)
   # dates of the start of the events
   start_index_begin <- c(1, 1 + cumsum(events_temp_begin$lengths))
-  start_index_event4_begin <- start_index[-length(start_index)][events_temp_begin$values > 0]
+  start_index_event4_begin <- start_index_begin[-length(start_index_begin)][events_temp_begin$values > 0]
   event_dates_begin <- date[start_index_event4_begin]
 
   return(list(events4 = event4, n_days = n_days, n_events4 = n_events4,
@@ -156,3 +159,73 @@ identify_winter_event4 <- function(date, temp_avg, precipitation,
 
   return(event4)
 }
+
+#' @export
+#' @rdname identify_winter_events
+identify_winter_eventX <- function(date, temp_min = c(), temp_max = c(), temp_avg = c(),
+                                   precipitation = c(),
+                                   temp_avg_day = +1, temp_avg_next_day = -1,
+                                   temp_max_thr_day = +1, temp_min_thr_next_day = -2,
+                                   number_days_after = 3,
+                                   prec_thr = 3) {
+
+  # fill gaps in the time series if it is necessary
+
+  # has an event X occurred in this day?
+  eventX <- sapply(1:(length(date)-number_days_after), function(i)
+    ifelse(temp_max[i] > temp_max_thr_day & min(temp_min[(i+1):(i+number_days_after)]) < temp_min_thr_next_day & precipitation[i] > prec_thr, 1, 0))
+  # no possibility to assess that in the last day
+  eventX <- c(eventX, rep(NA, number_days_after))
+
+  # total days with this kind of event
+  n_days <- sum(eventX, na.rm = T)
+
+  # identify number of events and duration
+  events_temp <- rle(eventX[-length(eventX)])
+
+  # number of events
+  n_eventsX <- sum(events_temp$values, na.rm = T)
+  # duration of each event
+  duration_eventsX <- events_temp$lengths[events_temp$values > 0 & !is.na(events_temp$values)]
+  # event number in the time series
+  sequence_eventsX <- ifelse(events_temp$values == 0, 0, cumsum(ifelse(events_temp$values == 0, 0, 1)))
+  n_eventX_date <- rep(sequence_eventsX, events_temp$lengths)
+  # dates of the start of the events
+  start_index <- c(1, 1 + cumsum(events_temp$lengths))
+  start_index_eventX <- start_index[-length(start_index)][events_temp$values > 0 & !is.na(events_temp$values)]
+  event_dates <- date[start_index_eventX]
+
+  # identify number of events and duration, only in the first half of the winter
+  second_half <- (length(date)/2):length(date)
+  eventX_begin <- eventX
+  eventX_begin[second_half] <- 0
+  n_days_begin <- sum(eventX_begin, na.rm = T)
+
+  events_temp_begin <- rle(eventX_begin)
+
+  # number of events
+  n_eventsX_begin <- sum(events_temp_begin$values, na.rm = T)
+  # duration of each event
+  duration_eventsX_begin <- events_temp_begin$lengths[events_temp_begin$values > 0]
+  # event number in the time series
+  sequence_eventsX_begin <- ifelse(events_temp_begin$values == 0, 0, cumsum(ifelse(events_temp_begin$values == 0, 0, 1)))
+  n_eventX_date_begin <- rep(sequence_eventsX_begin, events_temp_begin$lengths)
+  # dates of the start of the events
+  start_index_begin <- c(1, 1 + cumsum(events_temp_begin$lengths))
+  start_index_eventX_begin <- start_index_begin[-length(start_index_begin)][events_temp_begin$values > 0]
+  event_dates_begin <- date[start_index_eventX_begin]
+
+  return(list(eventsX = eventX, n_days = n_days, n_eventsX = n_eventsX,
+              duration_eventsX = duration_eventsX,
+              event_dates = event_dates, n_eventX_date = n_eventX_date,
+              eventsX_begin = eventX_begin, n_days_begin = n_days_begin, n_eventsX_begin = n_eventsX_begin,
+              duration_eventsX_begin = duration_eventsX_begin,
+              event_dates_begin = event_dates_begin, n_eventX_date_begin = n_eventX_date_begin))
+
+  return(eventX)
+}
+
+# test <- function(a = 1:4, x = 2, y = 1, z = (a <= x & a >= y)) {
+#   ifelse(z, 1, 0)
+# }
+# test()

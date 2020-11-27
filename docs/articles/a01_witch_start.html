@@ -82,7 +82,7 @@
       <h1 data-toc-skip>Starting with witch: winter conditions and characterization</h1>
                         <h4 class="author">Bernardo Brandão Niebuhr</h4>
             
-            <h4 class="date">2020-11-26</h4>
+            <h4 class="date">2020-11-27</h4>
       
       
       <div class="hidden name"><code>a01_witch_start.Rmd</code></div>
@@ -166,7 +166,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">weather_condition</span>
 <span class="co">#&gt; $weather_indices</span>
-<span class="co">#&gt; # A tibble: 212 x 13</span>
+<span class="co">#&gt; # A tibble: 212 x 14</span>
 <span class="co">#&gt;    date                snow_depth precipitation_s~ temp_min temp_max temp_avg</span>
 <span class="co">#&gt;    &lt;dttm&gt;                   &lt;dbl&gt;            &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
 <span class="co">#&gt;  1 2013-10-01 00:00:00          0                0     -4.5     12.3      2.1</span>
@@ -179,9 +179,9 @@
 <span class="co">#&gt;  8 2013-10-08 00:00:00          0                0      5.7     14.5     10.7</span>
 <span class="co">#&gt;  9 2013-10-09 00:00:00          0                0      3.7     11.8      7.6</span>
 <span class="co">#&gt; 10 2013-10-10 00:00:00          0                0     -2.1      6.5      2.1</span>
-<span class="co">#&gt; # ... with 202 more rows, and 7 more variables: cumulative_precitation &lt;dbl&gt;,</span>
+<span class="co">#&gt; # ... with 202 more rows, and 8 more variables: cumulative_precitation &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   prec_snow_ratio &lt;dbl&gt;, prec_snow_diff &lt;dbl&gt;, snow_prec_ratio &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   snow_prec_diff &lt;dbl&gt;, events3 &lt;dbl&gt;, events4 &lt;dbl&gt;</span>
+<span class="co">#&gt; #   snow_prec_diff &lt;dbl&gt;, events3 &lt;dbl&gt;, events4 &lt;dbl&gt;, eventsX &lt;dbl&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $events3</span>
 <span class="co">#&gt; $events3$events3</span>
@@ -230,7 +230,7 @@
 <span class="co">#&gt; [1] 1 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $events3$event_dates_begin</span>
-<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-24 UTC" "2014-03-15 UTC"</span>
+<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-24 UTC"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $events3$n_event3_date_begin</span>
 <span class="co">#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
@@ -297,6 +297,71 @@
 <span class="co">#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt;  [75] 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX</span>
+<span class="co">#&gt; $eventsX$eventsX</span>
+<span class="co">#&gt;   [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [26]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [51]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [76]  0  1  0  0  0  0  0  1  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [101]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [126]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [151]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [176]  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  1  0</span>
+<span class="co">#&gt; [201]  0  0  0  0  0  0  0  0  0 NA NA NA</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_days</span>
+<span class="co">#&gt; [1] 6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_eventsX</span>
+<span class="co">#&gt; [1] 6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$duration_eventsX</span>
+<span class="co">#&gt; [1] 1 1 1 1 1 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$event_dates</span>
+<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-22 UTC" "2013-12-24 UTC" "2014-03-14 UTC"</span>
+<span class="co">#&gt; [5] "2014-04-06 UTC" "2014-04-17 UTC"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_eventX_date</span>
+<span class="co">#&gt;   [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [26]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [51]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt;  [76]  0  1  0  0  0  0  0  2  0  3  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [101]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [126]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [151]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  4  0  0  0  0  0  0  0  0  0  0</span>
+<span class="co">#&gt; [176]  0  0  0  0  0  0  0  0  0  0  0  0  5  0  0  0  0  0  0  0  0  0  0  6  0</span>
+<span class="co">#&gt; [201]  0  0  0  0  0  0  0  0  0 NA NA</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$eventsX_begin</span>
+<span class="co">#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt;  [75] 0 0 1 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_days_begin</span>
+<span class="co">#&gt; [1] 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_eventsX_begin</span>
+<span class="co">#&gt; [1] 3</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$duration_eventsX_begin</span>
+<span class="co">#&gt; [1] 1 1 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$event_dates_begin</span>
+<span class="co">#&gt; [1] "2013-12-16 UTC" "2013-12-22 UTC" "2013-12-24 UTC"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $eventsX$n_eventX_date_begin</span>
+<span class="co">#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
+<span class="co">#&gt;  [75] 0 0 1 0 0 0 0 0 2 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span>
 <span class="co">#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</span></code></pre></div>

@@ -4,6 +4,9 @@
 # create figures for each year for mitt and tass
 # put on github with instructions
 
+# add eventX in the functions below: ndays, nevents, duration...
+
+
 # georeferrencing of events
 # write to Yves - number of predation events, road kills, according to the herders
 

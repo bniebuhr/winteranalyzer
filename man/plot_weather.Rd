@@ -10,7 +10,7 @@ plot_weather(
     "cumulative_precitation", "prec_snow_ratio", "prec_snow_diff", "snow_prec_ratio",
     "snow_prec_diff")[c(1, 2)],
   factor_mult = rep(1, length(term)),
-  add_events = c("", "events3", "events4")[1],
+  add_events = c("", "events3", "events4", "eventsX")[1],
   first_half = TRUE,
   cols = c(),
   units = c(),

@@ -3,6 +3,7 @@
 \name{identify_winter_event3}
 \alias{identify_winter_event3}
 \alias{identify_winter_event4}
+\alias{identify_winter_eventX}
 \title{Identify harsh weather winter events}
 \usage{
 identify_winter_event3(
@@ -21,6 +22,20 @@ identify_winter_event4(
   precipitation,
   temp_avg_day = +1,
   temp_avg_next_day = -1,
+  prec_thr = 3
+)
+
+identify_winter_eventX(
+  date,
+  temp_min = c(),
+  temp_max = c(),
+  temp_avg = c(),
+  precipitation = c(),
+  temp_avg_day = +1,
+  temp_avg_next_day = -1,
+  temp_max_thr_day = +1,
+  temp_min_thr_next_day = -2,
+  number_days_after = 3,
   prec_thr = 3
 )
 }
@@ -63,9 +78,12 @@ precipitation (in mm) to identify events that may be harsh weather conditions fo
 }
 \details{
 The events are:
-  * Events 1 and 2 are still to be implemented;
-  * Event 3: Day when max temp > 2, min temp < -2, and precipitation > 3 mm;
-  * Event 4: Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.
+\describe{
+  \item{Events 1 and 2}{Still to be implemented}
+  \item{Event 3}{Day when max temp > 2, min temp < -2, and precipitation > 3 mm.}
+  \item{Event 4}{Day when average temp > 1, precipitation > 3 mm, followed by day with average temp < -1.}
+  \item{Event X}{Day when max temp > 1, precipitation > 3 mm, followed minimum temp < -2 in any of the following 3 days.}
+  }
 }
 \examples{
 library(ggplot2)
@@ -73,19 +91,29 @@ library(dplyr)
 data(weather_mittadalen)
 
 weather <- weather_mittadalen \%>\%
-  dplyr::filter(year == 2014)
+  dplyr::filter(year == 2015)
 
 # events 3
 with(weather, identify_winter_event3(date, temp_min, temp_max, prec))
 
+# One can also change the parameters
+with(weather, identify_winter_event3(date, temp_min, temp_max, prec,
+                                     temp_max_thr = 0))
+
 # events 4
 with(weather, identify_winter_event4(date, temp_avg, prec))
+
+# events X
+with(weather, identify_winter_eventX(date, temp_max = temp_max, temp_min = temp_min,
+                                     precipitation = prec,
+                                     temp_max_thr_day = 1, temp_min_thr_next_day = -2,
+                                     number_days_after = 3))
 
 # visualize events 4 for this year
 weather_condition <-
   with(weather, analyze_weather(date, snow_depth, prec, temp_min, temp_max,
-                                     temp_avg, start = "first_date",
-                                     plot_first_snow = T))
+                                temp_avg, start = "first_date",
+                                plot_first_snow = T))
 
 to_plot <- weather_condition
 
@@ -96,7 +124,7 @@ to_plot$weather_indices <- weather_condition$weather_indices \%>\%
 to_plot \%>\%
   plot_weather(term = c("temp_avg", "prec", "temp_avg_next"), factor_mult = c(1,1)) +
   geom_hline(yintercept = c(-1,1), linetype = 2) +
-  ylim(-10, 5)
+  ylim(-10, 10)
 }
 \references{
 Lundqvist, H., Norell, L., Danel, O. 2007. Multivariate characterisation of environmental

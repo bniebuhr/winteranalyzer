@@ -150,6 +150,16 @@ the output of the function <code>analyze_weather</code>.</p>
   start <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"first_permanent_snow"</span>, <span class='st'>"first_date"</span>, <span class='st'>"other date"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
   plot_first_snow <span class='op'>=</span> <span class='cn'>FALSE</span>,
   set_start <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ev3_temp_min_thr <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>,
+  ev3_temp_max_thr <span class='op'>=</span> <span class='op'>+</span><span class='fl'>2</span>,
+  ev3_prec_thr <span class='op'>=</span> <span class='fl'>3</span>,
+  ev4_temp_avg_day <span class='op'>=</span> <span class='op'>+</span><span class='fl'>1</span>,
+  ev4_temp_avg_next_day <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span>,
+  ev4_prec_thr <span class='op'>=</span> <span class='fl'>3</span>,
+  evX_temp_max_thr_day <span class='op'>=</span> <span class='op'>+</span><span class='fl'>1</span>,
+  evX_temp_min_thr_next_day <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>,
+  evX_number_days_after <span class='op'>=</span> <span class='fl'>3</span>,
+  evX_prec_thr <span class='op'>=</span> <span class='fl'>3</span>,
   <span class='va'>...</span>
 <span class='op'>)</span>
 
@@ -262,11 +272,11 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 <span class='co'># analyze weather</span>
 <span class='va'>weather_condition</span> <span class='op'>&lt;-</span>
   <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>weather</span>, <span class='fu'>analyze_weather</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>snow_depth</span>, <span class='va'>prec</span>, <span class='va'>temp_min</span>, <span class='va'>temp_max</span>,
-                                     <span class='va'>temp_avg</span>, start <span class='op'>=</span> <span class='st'>"first_permanent_snow"</span>,
-                                     plot_first_snow <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span>
+                                <span class='va'>temp_avg</span>, start <span class='op'>=</span> <span class='st'>"first_permanent_snow"</span>,
+                                plot_first_snow <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='analyze_weather-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='va'>weather_condition</span>
 </div><div class='output co'>#&gt; $weather_indices
-#&gt; </span><span style='color: #555555;'># A tibble: 212 x 13</span><span>
+#&gt; </span><span style='color: #555555;'># A tibble: 212 x 14</span><span>
 #&gt;    date                snow_depth precipitation_s~ temp_min temp_max temp_avg
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> 2014-10-01 </span><span style='color: #555555;'>00:00:00</span><span>          0                0     -</span><span style='color: #BB0000;'>1.6</span><span>      9.9      6.3
@@ -279,9 +289,9 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span> 2014-10-08 </span><span style='color: #555555;'>00:00:00</span><span>          0                0      1.9      6.3      4.8
 #&gt; </span><span style='color: #555555;'> 9</span><span> 2014-10-09 </span><span style='color: #555555;'>00:00:00</span><span>          0                0      2.5      4.9      3.7
 #&gt; </span><span style='color: #555555;'>10</span><span> 2014-10-10 </span><span style='color: #555555;'>00:00:00</span><span>          0                0      3.4      5.5      4.1
-#&gt; </span><span style='color: #555555;'># ... with 202 more rows, and 7 more variables: cumulative_precitation </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'># ... with 202 more rows, and 8 more variables: cumulative_precitation </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
 #&gt; </span><span style='color: #555555;'>#   prec_snow_ratio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, prec_snow_diff </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, snow_prec_ratio </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
-#&gt; </span><span style='color: #555555;'>#   snow_prec_diff </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, events3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, events4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>#   snow_prec_diff </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, events3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, events4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, eventsX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; 
 #&gt; $events3
 #&gt; $events3$events3
@@ -401,6 +411,70 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
 #&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 #&gt; 
+#&gt; 
+#&gt; $eventsX
+#&gt; $eventsX$eventsX
+#&gt;   [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [26]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [51]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [76]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [101]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [126]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [151]  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [176]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  0  0  0  0  0  0
+#&gt; [201]  0  0  0  0  0  0  1  0  0 NA NA NA
+#&gt; 
+#&gt; $eventsX$n_days
+#&gt; [1] 4
+#&gt; 
+#&gt; $eventsX$n_eventsX
+#&gt; [1] 3
+#&gt; 
+#&gt; $eventsX$duration_eventsX
+#&gt; [1] 1 2 1
+#&gt; 
+#&gt; $eventsX$event_dates
+#&gt; [1] "2015-03-10 UTC" "2015-04-11 UTC" "2015-04-25 UTC"
+#&gt; 
+#&gt; $eventsX$n_eventX_date
+#&gt;   [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [26]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [51]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt;  [76]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [101]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [126]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [151]  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+#&gt; [176]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  2  2  0  0  0  0  0  0
+#&gt; [201]  0  0  0  0  0  0  3  0  0 NA NA
+#&gt; 
+#&gt; $eventsX$eventsX_begin
+#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt;  [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; 
+#&gt; $eventsX$n_days_begin
+#&gt; [1] 0
+#&gt; 
+#&gt; $eventsX$n_eventsX_begin
+#&gt; [1] 0
+#&gt; 
+#&gt; $eventsX$duration_eventsX_begin
+#&gt; integer(0)
+#&gt; 
+#&gt; $eventsX$event_dates_begin
+#&gt; POSIXct of length 0
+#&gt; 
+#&gt; $eventsX$n_eventX_date_begin
+#&gt;   [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt;  [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt;  [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [112] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [149] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; [186] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; 
 #&gt; </div><div class='input'>
 <span class='fu'>n_days</span><span class='op'>(</span><span class='va'>weather_condition</span>, event <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>n_events</span><span class='op'>(</span><span class='va'>weather_condition</span>, event <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
@@ -421,13 +495,10 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
   <span class='fu'><a href='plot_weather.html'>plot_weather</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"snow_depth"</span>, <span class='st'>"cum"</span>, <span class='st'>"prec"</span>, <span class='st'>"temp_max"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_vline</span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='va'>weather_condition</span><span class='op'>$</span><span class='va'>events3</span><span class='op'>$</span><span class='va'>event_dates</span>, linetype <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='img'><img src='analyze_weather-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='va'>weather_condition</span><span class='op'>$</span><span class='va'>weather_indices</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='plot_weather.html'>plot_weather</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"snow_depth"</span>, <span class='st'>"cum"</span>, <span class='st'>"prec"</span>, <span class='st'>"temp_max"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>geom_vline</span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='va'>weather_condition</span><span class='op'>$</span><span class='va'>events3</span><span class='op'>$</span><span class='va'>event_dates_begin</span>, linetype <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `weather_indices`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Unknown or uninitialised column: `weather_indices`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `select_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `select()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("select_"): no applicable method for 'select_' applied to an object of class "NULL"</span></div><div class='input'>
+<span class='va'>weather_condition</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='plot_weather.html'>plot_weather</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"snow_depth"</span>, <span class='st'>"cum"</span>, <span class='st'>"prec"</span>, <span class='st'>"temp_max"</span><span class='op'>)</span>,
+               add_events <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"events3"</span>, <span class='st'>"eventsX"</span><span class='op'>)</span>, first_half <span class='op'>=</span> <span class='cn'>F</span><span class='op'>)</span>
+</div><div class='img'><img src='analyze_weather-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># for several years</span>
 <span class='va'>n_weather</span> <span class='op'>&lt;-</span> <span class='va'>weather_mittadalen</span> <span class='op'>%&gt;%</span>
@@ -448,7 +519,7 @@ conditions for reindeer husbandry in Sweden. Rangifer, 27(1): 5-23.</p>
   <span class='fu'>tidyr</span><span class='fu'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_longer.html'>pivot_longer</a></span><span class='op'>(</span>cols <span class='op'>=</span> <span class='va'>n_days3</span><span class='op'>:</span><span class='va'>n_events4</span>, names_to <span class='op'>=</span> <span class='st'>"what"</span>, values_to <span class='op'>=</span> <span class='st'>"val"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>year</span>, y <span class='op'>=</span> <span class='va'>val</span>, color <span class='op'>=</span> <span class='va'>what</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_line</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='img'><img src='analyze_weather-4.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><div class='img'><img src='analyze_weather-5.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></span></pre>
   </div>

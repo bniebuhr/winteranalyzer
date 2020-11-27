@@ -8,8 +8,8 @@ weather <- weather_mittadalen %>%
 # analyze weather
 weather_condition <-
   with(weather, analyze_weather(date, snow_depth, prec, temp_min, temp_max,
-                                     temp_avg, start = "first_permanent_snow",
-                                     plot_first_snow = T))
+                                temp_avg, start = "first_permanent_snow",
+                                plot_first_snow = T))
 weather_condition
 
 n_days(weather_condition, event = 4)
@@ -31,9 +31,9 @@ weather_condition %>%
   plot_weather(term = c("snow_depth", "cum", "prec", "temp_max")) +
   geom_vline(xintercept = weather_condition$events3$event_dates, linetype = 2)
 
-weather_condition$weather_indices %>%
-  plot_weather(term = c("snow_depth", "cum", "prec", "temp_max")) +
-  geom_vline(xintercept = weather_condition$events3$event_dates_begin, linetype = 2)
+weather_condition %>%
+  plot_weather(term = c("snow_depth", "cum", "prec", "temp_max"),
+               add_events = c("events3", "eventsX"), first_half = F)
 
 
 # for several years

@@ -50,7 +50,16 @@ analyze_weather <- function(date, snow_depth, precipitation,
                             temp_min, temp_max, temp_avg,
                             start = c("first_permanent_snow", "first_date", "other date")[1],
                             plot_first_snow = FALSE,
-                            set_start = NULL, ...) {
+                            set_start = NULL,
+                            ev3_temp_min_thr = -2, ev3_temp_max_thr = +2,
+                            ev3_prec_thr = 3,
+                            ev4_temp_avg_day = +1,
+                            ev4_temp_avg_next_day = -1,
+                            ev4_prec_thr = 3,
+                            evX_temp_max_thr_day = +1,
+                            evX_temp_min_thr_next_day = -2,
+                            evX_number_days_after = 3,
+                            evX_prec_thr = 3, ...) {
 
   # define starting date
   if(start == "first_permanent_snow") {
@@ -73,9 +82,20 @@ analyze_weather <- function(date, snow_depth, precipitation,
   snow_prec_diff <- snow_depth - cum_prec
 
   # calculate events 3 and 4
-  events3 <- identify_winter_event3(date, temp_min, temp_max, precipitation_start, ...)
+  events3 <- identify_winter_event3(date, temp_min, temp_max, precipitation_start,
+                                    temp_min_thr = ev3_temp_min_thr, temp_max_thr = ev3_temp_max_thr,
+                                    prec_thr = ev3_prec_thr)
 
-  events4 <- identify_winter_event4(date, temp_avg, precipitation_start, ...)
+  events4 <- identify_winter_event4(date, temp_avg, precipitation_start, temp_avg_day = ev4_temp_avg_day,
+                                    temp_avg_next_day = ev4_temp_avg_next_day, prec_thr = ev4_prec_thr)
+
+  # calculate events X
+  eventsX <- identify_winter_eventX(date, temp_max = temp_max, temp_min = temp_min,
+                                    precipitation = precipitation_start,
+                                    temp_max_thr_day = evX_temp_max_thr_day,
+                                    temp_min_thr_next_day = evX_temp_min_thr_next_day,
+                                    number_days_after = evX_number_days_after,
+                                    prec_thr = evX_prec_thr)
 
   # make a data.frame with all
   weather.indices <- tibble::tibble(date, snow_depth, precipitation_start,
@@ -84,10 +104,14 @@ analyze_weather <- function(date, snow_depth, precipitation,
                                     prec_snow_ratio, prec_snow_diff,
                                     snow_prec_ratio, snow_prec_diff,
                                     events3 = events3$events3_begin,
-                                    events4 = events4$events4_begin)
+                                    events4 = events4$events4_begin,
+                                    eventsX = eventsX$eventsX_begin)
 
-  return(list(weather_indices = weather.indices, events3 = events3, events4 = events4))
+  return(list(weather_indices = weather.indices, events3 = events3, events4 = events4, eventsX = eventsX))
 }
+
+#!!!!!!!!!!!
+# add eventX in the functions below
 
 #' @export
 #' @param weather_analyzed list. output list from the function \code{\link[winteranalyzer]{analyze_weather}}.
